@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
         .subtitle { text-align: center; opacity: 0.8; font-size: 0.95rem; margin: 8px 0 25px 0; }
         .progress-container { position: relative; display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; }
         .circle-svg { transform: rotate(-90deg); width: 120px; height: 120px; }
-        .circle-bg { fill: none; stroke: #444; stroke-width: 8; }
+        .circle-bg { fill: none; stroke: #777; stroke-width: 8; }
         .circle-bar { fill: none; stroke: var(--primary); stroke-width: 8; stroke-linecap: round; transition: stroke-dasharray 1s ease-out; }
         .score-text { position: absolute; top: 42px; font-size: 1.6rem; font-weight: 800; color: var(--primary); }
         form { display: flex; flex-direction: column; width: 100%; }
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
 <body>
 
 <main>
-    <h1>ðŸŒ± Eco-Web Auditor</h1>
+    <h1>🌱 Eco-Web Auditor</h1>
     <p class="subtitle">Advanced 20-point digital efficiency check.</p>
 
     <?php if ($results): ?>
