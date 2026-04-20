@@ -47,7 +47,7 @@ Built as an entry for the **DEV Weekend Challenge: Earth Day Edition**.
 3. **Configure the App:**
    Open index.php and replace the placeholder with your key:
    ```php
-   PHP$apiKey = "YOUR_GEMINI_API_KEY_HERE";
+   $apiKey = "YOUR_GEMINI_API_KEY_HERE";
    ```
 4. **Deploy:**
    Upload the file to any server with PHP and cURL enabled.
