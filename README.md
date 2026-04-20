@@ -40,7 +40,7 @@ Built as an entry for the **DEV Weekend Challenge: Earth Day Edition**.
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/alvaromontoro/eco-web-auditor.git](https://github.com/alvaromontoro/eco-web-auditor.git)
+   git clone https://github.com/alvaromontoro/eco-web-auditor.git
    ```
 2. **Get an API Key:**
    Visit Google AI Studio to generate a free API key.
