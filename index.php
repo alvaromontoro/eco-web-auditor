@@ -62,50 +62,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A sustainability-focused web auditor to measure digital carbon footprints.">
+    <meta name="color-scheme" content="light dark">
     <title>Eco-Web Auditor | DEV Weekend Challenge</title>
+    <link rel="dns-prefetch" href="https://generativelanguage.googleapis.com">
+    <link rel="preconnect" href="https://generativelanguage.googleapis.com">
     <style>
         :root { --bg: #f4f7f6; --card: #fff; --primary: #1b5e20; --text: #333; }
-        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
-        
-        main { width: 100%; max-width: 600px; background: var(--card); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); box-sizing: border-box; }
-        
+        @media (prefers-color-scheme: dark) {
+            :root { --bg: #121212; --card: #1e1e1e; --text: #e0e0e0; --primary: #81c784; }
+        }
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        main { width: 100%; max-width: 600px; background: var(--card); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); box-sizing: border-box; }
         h1 { text-align: center; margin: 0; font-size: 1.8rem; color: var(--primary); }
-        .subtitle { text-align: center; color: #444; font-size: 0.95rem; margin-top: 8px; margin-bottom: 25px; }
-
+        .subtitle { text-align: center; opacity: 0.8; font-size: 0.95rem; margin: 8px 0 25px 0; }
         .progress-container { position: relative; display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; }
         .circle-svg { transform: rotate(-90deg); width: 120px; height: 120px; }
-        .circle-bg { fill: none; stroke: #eee; stroke-width: 8; }
+        .circle-bg { fill: none; stroke: #444; stroke-width: 8; }
         .circle-bar { fill: none; stroke: var(--primary); stroke-width: 8; stroke-linecap: round; transition: stroke-dasharray 1s ease-out; }
         .score-text { position: absolute; top: 42px; font-size: 1.6rem; font-weight: 800; color: var(--primary); }
-
         form { display: flex; flex-direction: column; width: 100%; }
-        input { width: 100%; padding: 14px; margin-bottom: 12px; border: 2px solid #eee; border-radius: 8px; font-size: 1rem; box-sizing: border-box; }
-        input:focus { border-color: var(--primary); outline: none; }
-        
-        button { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 10px; }
-        button:disabled { background: #a5d6a7; cursor: not-allowed; }
-
+        input { width: 100%; padding: 14px; margin-bottom: 12px; border: 2px solid #444; border-radius: 8px; font-size: 1rem; background: var(--card); color: var(--text); box-sizing: border-box; }
+        button { width: 100%; padding: 14px; background: var(--primary); color: var(--bg); border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        button:disabled { opacity: 0.6; cursor: not-allowed; }
         .spinner { width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s linear infinite; display: none; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* High Contrast Badges */
-        .result-item { border-bottom: 1px solid #f0f0f0; padding: 15px 0; display: flex; justify-content: space-between; align-items: center; }
-        .status-Excellent { color: #1b5e20; background: #e8f5e9; padding: 6px 10px; border-radius: 4px; font-size: 0.85rem; border: 1px solid #c8e6c9; font-weight: bold; }
-        .status-Pass { color: #0d47a1; background: #e3f2fd; padding: 6px 10px; border-radius: 4px; font-size: 0.85rem; border: 1px solid #bbdefb; font-weight: bold; }
-        .status-Fail { color: #b71c1c; background: #ffebee; padding: 6px 10px; border-radius: 4px; font-size: 0.85rem; border: 1px solid #ffcdd2; font-weight: bold; }
-
-        .other-section { margin-top: 25px; padding-top: 15px; border-top: 2px solid #eee; }
-        .other-section h3 { font-size: 1.1rem; color: #444; }
-        .other-list { color: #b71c1c; font-size: 0.9rem; padding-left: 20px; }
-
-        footer { margin-top: auto; padding: 24px; font-size: 0.9rem; color: #444; text-align: center; }
-        footer a { color: #1b5e20; text-decoration: underline; font-weight: 700; }
+        .result-item { border-bottom: 1px solid #444; padding: 15px 0; display: flex; justify-content: space-between; align-items: center; }
+        .status-Excellent { color: #1b5e20; background: #c8e6c9; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+        .status-Pass { color: #0d47a1; background: #bbdefb; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+        .status-Fail { color: #b71c1c; background: #ffcdd2; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+        .other-section { margin-top: 25px; padding-top: 15px; border-top: 2px solid #444; }
+        .other-list { color: #ef5350; font-size: 0.9rem; }
+        footer { margin-top: auto; padding: 24px; font-size: 0.85rem; opacity: 0.8; text-align: center; }
+        footer a { color: var(--primary); font-weight: 700; text-decoration: underline; }
     </style>
 </head>
 <body>
 
 <main>
-    <h1>🌱 Eco-Web Auditor</h1>
+    <h1>ðŸŒ± Eco-Web Auditor</h1>
     <p class="subtitle">Advanced 20-point digital efficiency check.</p>
 
     <?php if ($results): ?>
